@@ -9,7 +9,7 @@ fun CustomerRequest.toCustomer() = Customer(
   email = this.email
 )
 
-fun CustomerUpdateRequest.toCustomer(id: String):  Customer {
+fun CustomerUpdateRequest.toCustomer(id: Int):  Customer {
   return Customer(
     id = id,
     nome = this.nome,

@@ -29,16 +29,14 @@ class CustomerController(
 
   @GetMapping("/{id}")
   @ResponseStatus(HttpStatus.OK)
-  fun findCustomer(
-    @PathVariable("id") id: String
-  ): Customer {
+  fun findCustomerById(@PathVariable("id") id: Int): Customer {
     return customerService.findCustomerById(id)
   }
 
   @PutMapping("/{id}")
   @ResponseStatus(HttpStatus.NO_CONTENT)
   fun update(
-    @PathVariable("id") id: String,
+    @PathVariable("id") id: Int,
     @RequestBody customer: CustomerUpdateRequest) {
     customerService.update(customer.toCustomer(id))
   }
@@ -46,7 +44,7 @@ class CustomerController(
   @DeleteMapping("/{id}")
   @ResponseStatus(HttpStatus.NO_CONTENT)
   fun delete(
-    @PathVariable("id") id: String
+    @PathVariable("id") id: Int
   ) {
     return customerService.delete(id)
   }
