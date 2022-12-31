@@ -1,7 +1,9 @@
 package com.jfb.mercadolivro.services
 
+import com.jfb.mercadolivro.exceptions.NotFoundException
 import com.jfb.mercadolivro.models.Customer
 import com.jfb.mercadolivro.models.enums.CustomerStatus
+import com.jfb.mercadolivro.models.enums.Errors
 import com.jfb.mercadolivro.repositories.CustomerRepository
 import org.springframework.stereotype.Service
 
@@ -23,7 +25,8 @@ class CustomerService(
   }
 
   fun findById(id: Int): Customer {
-    return customerRepository.findById(id).orElseThrow()
+    return customerRepository.findById(id).orElseThrow {
+      NotFoundException(Errors.PYTE202.message.format(id), Errors.PYTE202.code) }
   }
 
   fun update(customer: Customer) {

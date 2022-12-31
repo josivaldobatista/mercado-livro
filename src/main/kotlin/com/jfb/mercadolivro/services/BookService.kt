@@ -1,8 +1,10 @@
 package com.jfb.mercadolivro.services
 
+import com.jfb.mercadolivro.exceptions.NotFoundException
 import com.jfb.mercadolivro.models.Book
 import com.jfb.mercadolivro.models.Customer
 import com.jfb.mercadolivro.models.enums.BookStatus
+import com.jfb.mercadolivro.models.enums.Errors
 import com.jfb.mercadolivro.repositories.BookRepository
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
@@ -25,7 +27,8 @@ class BookService(
   }
 
   fun findById(id: Int): Book {
-    return bookRepository.findById(id).orElseThrow()
+    return bookRepository.findById(id).orElseThrow {
+      NotFoundException(Errors.PYTE101.message.format(id), Errors.PYTE101.code) }
   }
 
   fun delete(id: Int) {
