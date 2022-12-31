@@ -4,8 +4,9 @@ import com.jfb.mercadolivro.models.Book
 import com.jfb.mercadolivro.models.Customer
 import com.jfb.mercadolivro.models.enums.BookStatus
 import com.jfb.mercadolivro.repositories.BookRepository
+import org.springframework.data.domain.Page
+import org.springframework.data.domain.Pageable
 import org.springframework.stereotype.Service
-import org.springframework.web.bind.annotation.DeleteMapping
 
 @Service
 class BookService(
@@ -15,12 +16,12 @@ class BookService(
     bookRepository.save(book)
   }
 
-  fun findAll(): List<Book> {
-    return bookRepository.findAll()
+  fun findAll(pageable: Pageable): Page<Book> {
+    return bookRepository.findAll(pageable)
   }
 
-  fun findActive(): List<Book> {
-    return bookRepository.findByStatus(BookStatus.ATIVO)
+  fun findActive(pageable: Pageable): Page<Book> {
+    return bookRepository.findByStatus(BookStatus.ATIVO, pageable)
   }
 
   fun findById(id: Int): Book {

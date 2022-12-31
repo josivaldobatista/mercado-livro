@@ -7,6 +7,9 @@ import com.jfb.mercadolivro.extensions.toBook
 import com.jfb.mercadolivro.extensions.toResponse
 import com.jfb.mercadolivro.services.BookService
 import com.jfb.mercadolivro.services.CustomerService
+import org.springframework.data.domain.Page
+import org.springframework.data.domain.Pageable
+import org.springframework.data.web.PageableDefault
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.*
 
@@ -25,12 +28,16 @@ class BookController(
   }
 
   @GetMapping
-  fun findAll(): List<BookResponse> {
-    return bookService.findAll().map { it.toResponse() }
+  fun findAll(
+    @PageableDefault(page = 0, size = 10) pageable: Pageable
+  ): Page<BookResponse> {
+    return bookService.findAll(pageable).map { it.toResponse() }
   }
 
   @GetMapping("/active")
-  fun findActive(): List<BookResponse> = bookService.findActive().map { it.toResponse() }
+  fun findActive(
+    @PageableDefault(page = 0, size = 10) pageable: Pageable
+  ): Page<BookResponse> = bookService.findActive(pageable).map { it.toResponse() }
 
   @GetMapping("/{id}")
   fun findById(@PathVariable id: Int): BookResponse {
