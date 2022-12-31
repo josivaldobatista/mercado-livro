@@ -1,9 +1,11 @@
 package com.jfb.mercadolivro.extensions
 
+import com.jfb.mercadolivro.controllers.response.CustomerResponse
 import com.jfb.mercadolivro.controllers.request.BookRequest
 import com.jfb.mercadolivro.controllers.request.BookUpdateRequest
 import com.jfb.mercadolivro.controllers.request.CustomerRequest
 import com.jfb.mercadolivro.controllers.request.CustomerUpdateRequest
+import com.jfb.mercadolivro.controllers.response.BookResponse
 import com.jfb.mercadolivro.models.Book
 import com.jfb.mercadolivro.models.Customer
 import com.jfb.mercadolivro.models.enums.BookStatus
@@ -38,3 +40,22 @@ fun BookUpdateRequest.toBook(previousValue: Book) = Book(
   status = previousValue.status,
   customer = previousValue.customer
 )
+
+fun Customer.toResponse(): CustomerResponse {
+  return CustomerResponse(
+    id = this.id,
+    nome = this.nome,
+    email = this.email,
+    status = this.status
+  )
+}
+
+fun  Book.toResponse(): BookResponse {
+  return BookResponse(
+    id = this.id,
+    name = this.name,
+    price = this.price,
+    customer = this.customer,
+    status = this.status
+  )
+}

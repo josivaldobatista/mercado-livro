@@ -2,8 +2,9 @@ package com.jfb.mercadolivro.controllers
 
 import com.jfb.mercadolivro.controllers.request.BookRequest
 import com.jfb.mercadolivro.controllers.request.BookUpdateRequest
+import com.jfb.mercadolivro.controllers.response.BookResponse
 import com.jfb.mercadolivro.extensions.toBook
-import com.jfb.mercadolivro.models.Book
+import com.jfb.mercadolivro.extensions.toResponse
 import com.jfb.mercadolivro.services.BookService
 import com.jfb.mercadolivro.services.CustomerService
 import org.springframework.http.HttpStatus
@@ -24,16 +25,16 @@ class BookController(
   }
 
   @GetMapping
-  fun findAll(): List<Book> {
-    return bookService.findAll()
+  fun findAll(): List<BookResponse> {
+    return bookService.findAll().map { it.toResponse() }
   }
 
   @GetMapping("/active")
-  fun findActive(): List<Book> = bookService.findActive()
+  fun findActive(): List<BookResponse> = bookService.findActive().map { it.toResponse() }
 
   @GetMapping("/{id}")
-  fun findById(@PathVariable id: Int): Book {
-    return bookService.findById(id)
+  fun findById(@PathVariable id: Int): BookResponse {
+    return bookService.findById(id).toResponse()
   }
 
   @DeleteMapping("/{id}")
