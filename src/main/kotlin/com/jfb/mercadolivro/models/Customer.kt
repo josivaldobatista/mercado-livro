@@ -1,5 +1,6 @@
 package com.jfb.mercadolivro.models
 
+import com.jfb.mercadolivro.models.enums.CustomerStatus
 import javax.persistence.*
 
 @Entity
@@ -9,8 +10,14 @@ data class Customer(
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   var id: Int? = null,
+
   @Column
   var nome: String,
+
   @Column
-  var email: String
+  var email: String,
+
+  @Column
+  @Enumerated(EnumType.STRING)
+  var status: CustomerStatus
 )

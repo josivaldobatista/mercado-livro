@@ -1,6 +1,7 @@
 package com.jfb.mercadolivro.repositories
 
 import com.jfb.mercadolivro.models.Book
+import com.jfb.mercadolivro.models.Customer
 import com.jfb.mercadolivro.models.enums.BookStatus
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.stereotype.Repository
@@ -9,4 +10,5 @@ import org.springframework.stereotype.Repository
 interface BookRepository: JpaRepository<Book, Int> {
 
   fun findByStatus(ativo: BookStatus): List<Book>
+  fun findByCustomer(customer: Customer): List<Book>
 }

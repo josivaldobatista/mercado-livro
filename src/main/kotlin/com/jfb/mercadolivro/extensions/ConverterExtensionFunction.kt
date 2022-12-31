@@ -7,17 +7,20 @@ import com.jfb.mercadolivro.controllers.request.CustomerUpdateRequest
 import com.jfb.mercadolivro.models.Book
 import com.jfb.mercadolivro.models.Customer
 import com.jfb.mercadolivro.models.enums.BookStatus
+import com.jfb.mercadolivro.models.enums.CustomerStatus
 
 fun CustomerRequest.toCustomer() = Customer(
   nome = this.nome,
-  email = this.email
+  email = this.email,
+  status = CustomerStatus.ATIVO
 )
 
-fun CustomerUpdateRequest.toCustomer(id: Int):  Customer {
+fun CustomerUpdateRequest.toCustomer(previousValue: Customer):  Customer {
   return Customer(
-    id = id,
+    id = previousValue.id,
     nome = this.nome,
-    email = this.email
+    email = this.email,
+    status = previousValue.status
   )
 }
 
