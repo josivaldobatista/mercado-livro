@@ -20,7 +20,7 @@ class CustomerService(
     return customerRepository.findAll()
   }
 
-  fun findCustomerById(id: Int): Customer {
+  fun findById(id: Int): Customer {
     return customerRepository.findById(id).orElseThrow()
   }
 
@@ -36,7 +36,6 @@ class CustomerService(
     if (!customerRepository.existsById(id)) {
       throw Exception()
     }
-
     customerRepository.deleteById(id)
   }
 }

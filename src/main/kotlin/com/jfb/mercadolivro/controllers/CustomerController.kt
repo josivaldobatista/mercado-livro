@@ -30,7 +30,7 @@ class CustomerController(
   @GetMapping("/{id}")
   @ResponseStatus(HttpStatus.OK)
   fun findCustomerById(@PathVariable("id") id: Int): Customer {
-    return customerService.findCustomerById(id)
+    return customerService.findById(id)
   }
 
   @PutMapping("/{id}")
