@@ -8,6 +8,7 @@ import com.jfb.mercadolivro.extensions.toResponse
 import com.jfb.mercadolivro.services.CustomerService
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.*
+import javax.validation.Valid
 
 @RestController
 @RequestMapping("/customers")
@@ -17,7 +18,7 @@ class CustomerController(
 
   @PostMapping
   @ResponseStatus(HttpStatus.CREATED)
-  fun create(@RequestBody customer: CustomerRequest) {
+  fun create(@RequestBody @Valid customer: CustomerRequest) {
     customerService.create(customer.toCustomer())
   }
 
@@ -37,7 +38,7 @@ class CustomerController(
   @ResponseStatus(HttpStatus.NO_CONTENT)
   fun update(
     @PathVariable("id") id: Int,
-    @RequestBody customer: CustomerUpdateRequest) {
+    @RequestBody @Valid customer: CustomerUpdateRequest) {
     val customerSaved = customerService.findById(id)
     customerService.update(customer.toCustomer(customerSaved))
   }
