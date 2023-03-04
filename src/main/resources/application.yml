@@ -9,3 +9,31 @@ spring:
     password: senha432
   jackson:
     default-property-inclusion: non_null
+
+#Actuator - endpoints customizados
+management:
+  info:
+    git:
+      mode: full # Habilita informações de versionamento da aplicaçõo no endpoint info
+  endpoint:
+    shutdown:
+      enabled: true # Fornece endpoint para desligar a aplicação
+    health:
+      show-details: always
+      metrics:
+        enabled: false
+      prometheus:
+        enabled: true
+  endpoints:
+    web:
+      base-path: /monitoring
+      exposure:
+        include: '*'
+      path-mapping:
+        info: information # Renomeando endpoint info
+        beans: springbeans # Renomeando endpoint beans
+  metrics:  # Prometheus
+    export:
+      prometheus:
+        enabled: true
+
